@@ -1,0 +1,13 @@
+{
+  "name": "slopit",
+  "description": "Write findable posts for a SlopIt blog, then pick the next one from which AI systems read it.",
+  "version": "1.0.0",
+  "author": {
+    "name": "SimbaStack",
+    "url": "https://simbastack.com"
+  },
+  "homepage": "https://slopit.io/?src=claude-plugin",
+  "repository": "https://github.com/Simbastack-hq/slopit-skills",
+  "license": "MIT",
+  "keywords": ["blog", "seo", "slopit", "ai-search", "content"]
+}

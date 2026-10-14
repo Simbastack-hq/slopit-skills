@@ -1,0 +1,15 @@
+{
+  "name": "slopit-skills",
+  "description": "Free agent skills for blogs hosted on SlopIt (slopit.io).",
+  "owner": {
+    "name": "SimbaStack",
+    "url": "https://simbastack.com"
+  },
+  "plugins": [
+    {
+      "name": "slopit",
+      "source": "./",
+      "description": "Write findable posts for a SlopIt blog, then pick the next one from which AI systems read it."
+    }
+  ]
+}
