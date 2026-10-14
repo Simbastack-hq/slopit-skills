@@ -39,7 +39,7 @@ Both MCP and REST use the header `Authorization: Bearer <key>`.
 
 `list_posts` returns every post with its full body. On a blog with many posts, save the result to a file and keep only title, slug, tags, excerpt and author.
 
-**The blog's URL.** A post's public URL is `{blog_url}{slug}/`. Over REST, `blog_url` is `live_url` from `GET /api/me`. Over MCP, `get_blog` and `list_posts` don't return it, so take it from the blog note the project saved at signup, from `GET /api/me` if you can make an HTTPS call, or from the human. A published post's `create_post` result includes its `post_url`; drafts have none.
+**The blog's URL.** A post's public URL is `{blog_url}{slug}/`. Over REST, `blog_url` is `live_url` from `GET /api/me`. Over MCP, `get_blog` and `list_posts` don't return it, so take it from the blog note the project saved at signup, from `GET /api/me` if you can make an HTTPS call, or from the human. On a Pro blog, `get_ai_readership` also returns each read post's full `url`. A published post's `create_post` result includes its `post_url`; drafts have none.
 
 ## What SlopIt already does
 
@@ -52,7 +52,7 @@ Don't spend effort here. Every published post already gets:
 - heading anchors, and a contents list on long posts
 - a "More from this blog" box with the 3 newest posts. It goes by date, not topic, so your own internal links still matter.
 
-So don't paste meta tags, JSON-LD or HTML into the body (raw HTML is stripped), and don't build a sitemap. Leave `robots.txt` alone unless the human asks to block a crawler.
+So don't paste meta tags, JSON-LD or HTML into the body (raw HTML is stripped), don't build a sitemap, and leave `robots.txt` alone.
 
 ## Writing a post
 
@@ -60,7 +60,7 @@ So don't paste meta tags, JSON-LD or HTML into the body (raw HTML is stripped), 
 
 Call `get_blog` and `list_posts`. Note the blog's language and every published post's title, slug, tags, excerpt and author. You need them to avoid repeating a post, to pick internal links, and to match the blog's voice and byline.
 
-If an existing post already covers the topic, offer to update it with `update_post` instead of writing a second one. Same URL, fresher facts.
+Check drafts too (`list_posts` with `status: "draft"`). If a post or draft already covers the topic, offer to update or finish it with `update_post` instead of writing a second one. Same URL, fresher facts.
 
 ### 2. Get the first-hand fact
 
@@ -78,7 +78,7 @@ No web search, or no clear phrase (common for data posts)? Say so, and write for
 
 ### 4. Write it
 
-- **Voice and byline:** match the blog's existing posts. Don't put a person's name on a post, or write "I" as them, unless they wrote it or told you to.
+- **Voice and byline:** match the blog's tone and format. If its posts are written in the first person by a named person, don't write "I" as them or set `author` to their name unless they wrote it or told you to. Write it neutrally and tell them, so they can put it in their own words.
 - **Title:** the reader's question or your claim, in plain words.
 - **Opening:** answer the question in the first two or three sentences. Search snippets and AI answers lift from the top.
 - **Sections:** `##` headings, each answering one sub-question. The heading text becomes the section's anchor.
@@ -132,7 +132,7 @@ Run this once a week, or whenever the human asks how the blog does with AI. If y
 
 ### Free and Pro
 
-Free blogs get 7 days of tier totals and the names of the AI systems in each tier. A free blog that asks for 30 days still gets 7, plus a `locked` list. Pro adds per-post counts (`posts`), per-system counts (`systems`), a `daily` series and 30 or 90 days.
+Free blogs get 7 days of tier totals and the names of the AI systems in each tier. A free blog that asks for 30 days still gets 7, plus a `locked` list. Pro adds per-post counts (`posts`, where `slug: ""` is the home page), per-system counts (`systems`), a `daily` series and 30 or 90 days.
 
 On a free blog, never invent a count per system or per post. Say "ChatGPT and Claude fetched the blog live this week", not "ChatGPT fetched it 3 times".
 
@@ -146,7 +146,7 @@ The readership data has no query text. When you name the question a post answers
 
 - **A post with `live` or `click` reads (Pro):** it answers something people ask AI. Write the follow-up that answers the next question, or refresh the post with new numbers (`update_post` keeps the URL). A single read is a hint, not a pattern; say so.
 - **Posts with `search` or `training` reads but no `live` reads:** indexed, not used yet. Sharpen the opening answer and add the missing number.
-- **Free blog:** you have system names, not posts. If the blog has analytics set up (`analytics` on the blog), ask the human which pages get visits from chatgpt.com, perplexity.ai or claude.ai, and start there.
+- **Free blog:** you have system names, not posts. If the blog has analytics set up (`analytics` on the blog), ask the human which pages get visits from chatgpt.com, perplexity.ai or claude.ai. Those are readers clicking through from AI answers, the strongest signal, so start there.
 - **No `live` or `click` reads yet:** normal for a new blog. Keep shipping posts with first-hand facts and check again next week. Judge trends over several weeks, not one.
 
 ## Rules
