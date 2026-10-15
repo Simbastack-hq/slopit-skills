@@ -93,9 +93,9 @@ Only the fields in `GET /api/schema` exist. Anything else, such as `metaDescript
 
 | Field | What to put |
 |---|---|
-| `title` | Make it search-friendly too: the page's `<title>` tag is `title` plus the blog name. Max 200. |
+| `title` | The heading on the page, in plain words. Without a `seoTitle`, the page's `<title>` tag is `title` plus the blog name. Max 200. |
 | `slug` | 3 to 6 words, lowercase with hyphens, the main phrase. It can't change later. Check `list_posts` (both statuses) for clashes. |
-| `seoTitle` | About 60 characters, main phrase near the front. Used for link previews and structured data. Max 200. |
+| `seoTitle` | About 60 characters, main phrase near the front. It becomes the page's `<title>` exactly as written (no blog name added) and the link-preview title. Max 200. |
 | `seoDescription` | About 150 to 155 characters on what the reader gets, with the fact if it fits. This is the meta description. Max 300. |
 | `excerpt` | One or two sentences for the post list. Max 300. |
 | `tags` | 2 to 5 topics. Reuse the blog's existing tags where they fit. |
